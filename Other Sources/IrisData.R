@@ -1,6 +1,8 @@
 IrisData = read.csv('Iris.csv')
 #https://www.kaggle.com/jchen2186/machine-learning-with-iris-dataset/notebook
 
+#Models: Multinomial, kNN, Decision Tree 
+
 ##############################################################################################
 ################################    Simple Regression  ####################################
 IrisData = read.csv('Iris.csv')
