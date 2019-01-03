@@ -7,38 +7,68 @@ IrisData = read.csv('Iris.csv')
 ################################    Simple Regression  ####################################
 IrisData = read.csv('Iris.csv')
 
-workdata = IrisData
+mydata = IrisData
+
+
+#Splitting data into workdata and testdata, to test after building a model.
+set.seed(143)
+trainrows = sample(nrow(mydata),round(0.80*nrow(mydata)))
+workdata = mydata[trainrows,]
+testdata = mydata[-trainrows,]
 
 #Remove ID
 workdata$Id = NULL
+testdata$Id = NULL
 
 str(workdata)
 
+
+# Changing levelnames as they are creating issue while building model, '-' in the middle
 levels(workdata$Species) = c("setosa","versicolor","virginica")
-#setosa - 1     versocolor - 2    Virginica - 3 
-#workdata$Species = as.numeric(workdata$Species)
+levels(testdata$Species) = c("setosa","versicolor","virginica")
 
-library(dummies)
-?dummy.data.frame
-workdata = dummy.data.frame(workdata, sep = "")
 
-library(corrplot)
-corrplot(cor(workdata), method = 'number')
+# Different workdatas for three linear models, Splitting 
+# One vs ALL Approach, we have to train three models seperately as we have three different classes
+workdata_setosa = workdata
+workdata_setosa$Species = ifelse(workdata$Species == "setosa", 1, 0)
+table(workdata_setosa$Species)
 
-names(workdata)
-#Train and test data split
-set.seed(143)
-trainrows = sample(nrow(workdata),round(0.70*nrow(workdata)))
-traindata = workdata[trainrows,]
-testdata = workdata[-trainrows,]
+workdata_versicolor = workdata
+workdata_versicolor$Species = ifelse(workdata$Species == "versicolor", 1, 0)
+table(workdata_versicolor$Species)
 
+workdata_virginica = workdata
+workdata_virginica$Species = ifelse(workdata$Species == "virginica", 1, 0)
+table(workdata_virginica$Species)
+
+
+names(workdata_virginica)
+str(workdata_setosa)
 
 #Regression Models
-mymodel1 = glm(Speciessetosa~., data = traindata, family = binomial(link = "logit"), maxit =100)
+mymodelsetosa = glm(Species~., data = workdata_setosa, family = binomial(link = "logit"), maxit = 100)
+mymodelversicolor = glm(Species~., data = workdata_versicolor, family = binomial(link = "logit"), maxit = 100)
+mymodelvirginica = glm(Species~., data = workdata_virginica, family = binomial(link = "logit"), maxit = 100)
 
-mymodel2 = glm(Speciesversicolor~., data = traindata, family = binomial(link = "logit"), maxit =100)
+#testing three models seperately
+Preds_setosa = predict(mymodelsetosa, testdata, type = "response")
+Preds_versicolor = predict(mymodelversicolor, testdata, type = "response")
+Preds_virginica = predict(mymodelvirginica, testdata, type = "response")
 
-mymodel3 = glm(Speciesvirginica~., data = traindata, family = binomial(link = "logit"), maxit =100)
+# Combine all the predictions into one dataset.
+testdata = cbind(testdata, Preds_setosa, Preds_versicolor, Preds_virginica)
+
+# Highest probability 
+#For every test data, 3 models give 3 probabilities. classify them into respective classes w.r.to highest prob
+testdata$MyPred = ifelse(testdata$Preds_setosa > testdata$Preds_versicolor, ifelse(testdata$Preds_setosa > testdata$Preds_virginica, 'setosa','virginica'), ifelse(testdata$Preds_versicolor > testdata$Preds_virginica, 'versicolor','virginica') )
+
+#Checking if there are any mismatches
+testdata$Err = ifelse(testdata$Species == testdata$MyPred, 0, 1)
+
+#If there are mismatches, where did they occur ?
+table(testdata$Err)
+testdata[testdata$Err == 1,]
 
 
 

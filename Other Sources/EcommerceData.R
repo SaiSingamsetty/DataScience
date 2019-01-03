@@ -23,3 +23,22 @@ nrow(ecomdata[ecomdata$CustomerID == 12583 && ecomdata$InvoiceDate %in% '12/1/20
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
