@@ -1,0 +1,11 @@
+IrisData.R : 
+	Simple Logistic and Multiple Logistic Regression
+	Decision Trees
+	Knn Algorithm
+	
+StringRFunc.R :
+  Stringr inbuilt functions
+  
+Clustering.R :
+  Detailed Explanation on K-Means Clustering
+  and Hierarchical Clustering
