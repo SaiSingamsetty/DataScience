@@ -11,3 +11,135 @@ https://towardsdatascience.com/decision-tree-ensembles-bagging-and-boosting-266a
 
 
 Refer Bagging and Boosting in AnalyticsVidya
+
+
+==========================================================================================================
+https://www.analyticsvidhya.com/blog/2018/06/comprehensive-guide-for-ensemble-models/
+
+
+Ensemble Learning:
+
+Ensemble Learning works on the principle of combining the decisions from multiple models to improve the overall performance.
+
+Diverse group of people can make better decisions than individual. Similar is true for diverse set of models in comparison to single models. The diversification in machine learning is achieved through Ensemble Learning.
+
+
+Bagging:
+The idea behind this is to combine results from multiple models (ex: All decision trees)
+
+If you create all the models on the same set of data and combine it, will it be useful? There is a high chance that these models will give the same result since they are getting the same input. So how can we solve this problem? One of the techniques is bootstrapping.
+
+Bootstrapping is a sampling technique in which we create subsets of observations from the original dataset, with replacement. The size of the subsets is the same as the size of the original set.
+
+Bagging (or Bootstrap Aggregating) technique uses these subsets (bags) to get a fair idea of the distribution (complete set). The size of subsets created for bagging may be less than the original set.
+
+	1. A base model (weak model) is created on each of these subsets.
+	2. The models run in parallel and are independent of each other.
+	3. The final predictions are determined by combining the predictions from all the models.
+
+Boosting:
+If a data point is incorrectly predicted by the first model, and then the next (probably all models), will combining the predictions provide better results? Such situations are taken care of by boosting.
+Boosting is a sequential process, where each subsequent model attempts to correct the errors of the previous model. The succeeding models are dependent on the previous model. 
+
+How ?
+
+A subset is created from the original dataset.
+Initially, all data points are given equal weights.
+A base model is created on this subset.
+This model is used to make predictions on the whole dataset.
+
+Errors are calculated using the actual values and predicted values.
+The observations which are incorrectly predicted, are given higher weights.
+Another model is created and predictions are made on the dataset. (This model tries to correct the errors from the previous model)
+
+Similarly, multiple models are created, each correcting the errors of the previous model.
+
+The final model (strong learner) is the weighted mean of all the models (weak learners).
+Thus, the boosting algorithm combines a number of weak learners to form a strong learner. 
+The individual models would not perform well on the entire dataset, but they work well for some part of the dataset. 
+Thus, each model actually boosts the performance of the ensemble.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Bagging Algorithms
+	Random Forest
+
+Boosting Algorithms
+	Ada Boost
+	Gradient Boosting Machine
+	XGBM
+	
+
+Random Forest
+
+Random Forest is another ensemble machine learning algorithm that follows the bagging technique. It is an extension of the bagging estimator algorithm. The base estimators in random forest are decision trees. Unlike bagging meta estimator, random forest randomly selects a set of features which are used to decide the best split at each node of the decision tree.
+Looking at it step-by-step, this is what a random forest model does:
+	1. Random subsets are created from the original dataset (bootstrapping).
+	2. At each node in the decision tree, only a random set of features are considered to decide the best split.
+	3. A decision tree model is fitted on each of the subsets.
+	4. The final prediction is calculated by averaging the predictions from all decision trees.
+
+
+Ada Boost
+
+Adaptive boosting or Ada Boost is one of the simplest boosting algorithms. Usually, decision trees are used for modelling. Multiple sequential models are created, each correcting the errors from the last model. Ada Boost assigns weights to the observations which are incorrectly predicted and the subsequent model works to predict these values correctly.
+Below are the steps for performing the Ada Boost algorithm:
+	1. Initially, all observations in the dataset are given equal weights.
+	2. A model is built on a subset of data.
+	3. Using this model, predictions are made on the whole dataset.
+	4. Errors are calculated by comparing the predictions and actual values.
+	5. While creating the next model, higher weights are given to the data points which were predicted incorrectly.
+	6. Weights can be determined using the error value. For instance, higher the error more is the weight assigned to the observation.
+	7. This process is repeated until the error function does not change, or the maximum limit of the number of estimators is reached.
+
+
+
+ Gradient Boosting
+
+Gradient Boosting or GBM is another ensemble machine learning algorithm that works for both regression and classification problems. 
+GBM uses the boosting technique, combining a number of weak learners to form a strong learner. Regression trees used as a base learner, each subsequent tree in series is built on the errors calculated by the previous tree.
+
+============================================================================================================================================
+Generally, we use ensemble technique for supervised learning algorithms. But, you can use an ensemble for unsupervised learning algorithms also. Refer
+https://en.wikipedia.org/wiki/Consensus_clustering
+
+
+Some important points to note
+https://www.analyticsvidhya.com/blog/2017/02/40-questions-to-ask-a-data-scientist-on-ensemble-modeling-techniques-skilltest-solution/
+
+
+
+=============================================================
+mtry in Random Forest:
+
+Consider a single tree being added to a Random Forest (RF) model.
+
+The standard recursive partitioning algorithm would start with all the data and do an exhaustive search over all variables and possible split points to find the one that best "explained" the entire data - reduced the node impurity the most. The data are split according to the best split point and the process repeated in the left and right leaves in turn, recursively, until some stopping rules are met. The key thing here is that each time the recursive partitioning algorithm looks for a split all the variables are included in the search.
+
+Where RF models differ is that when forming each split in a tree, the algorithm randomly selects mtry variables from the set of predictors available. Hence when forming each split a different random set of variables is selected within which the best split point is chosen.
+
+Hence for large trees, which is what RFs use, it is at least conceivable that all variables might be used at some point when searching for split points whilst growing the tree.
+
+
+
+strata in random forest:
+stratified sampling on the column mentioned. It will create bags for Random forest 
+by creating samples as per the strata
+
+classwt in Random forest:
+Increasing weightage for the weak class in the column.
+If Yes is 90% and No is 10% in a target column, It is imbalanced, 
+During Bootstrapping, the No 10% records might get neglected.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

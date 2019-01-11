@@ -1,64 +1,41 @@
-data1 = read.csv("C:/Users/phsivale/Documents/Trainings/titanic.csv",
-                 na.strings=c(""," ","NA","?","  "))
-names(data1)
+# Titanic Data Set
+#survived -> Target
+mydata = read.csv('titanic.csv')
+
+names(mydata)
 colsToUse = c('pclass','survived','sex','age','fare',
               'sibsp','parch','embarked')
-data1 = data1[,colsToUse]
+mydata = mydata[,colsToUse]
 
-str(data1)
 ###
 # install.packages('DMwR')
 library(DMwR)
-data2 = knnImputation(data = data1,k=5)
-summary(data2)
-sum(is.na(data2))
-summary(data1)
+mydata = knnImputation(data = mydata,k=5)
+summary(mydata)
+sum(is.na(mydata))
+summary(mydata)
 
 # data2$pclass = as.factor(data2$pclass)
-data2$sex = as.factor(data2$sex)
-data2$survived = as.factor(data2$survived)
+mydata$sex = as.factor(mydata$sex)
+mydata$survived = as.factor(mydata$survived)
 
-summary(data2)
+summary(mydata)
 
-#### Handling Sibsp and Parch
+str(mydata)
+names(mydata)
+summary(mydata)
 
-table(data1$sibsp)
+#### train test split
+mydata$survived = as.factor(mydata$survived)
+set.seed(123)
+rows = 1:nrow(mydata)
+trainRows = sample(rows,round(0.7*nrow(mydata)))
 
-# data2$sibsp_cat = ifelse(data2$sibsp > 1,'>2',data2$sibsp)
-# data2$sibsp_cat = as.factor(data2$sibsp_cat)
-# 
-# table(data1$parch)
-# data2$parch_cat = ifelse(data2$parch > 1,'>1',data2$parch)
-# data2$parch_cat = as.factor(data2$parch_cat)
-summary(data2)
-
-# ### Dropping sibsp and parch
-# data2$sibsp = NULL
-# data2$parch = NULL
-
-summary(data2)
-
-# data2$pclass = as.factor(data2$pclass)
-hist(data2$fare)
-quantile(data2$fare,1)
-
-data2$fare[data2$fare > quantile(data2$fare,0.99)] = quantile(data2$fare,0.99)
-data2$fare = sqrt(data2$fare)
-summary(data2)
-
-##### train test split
-data2$survived = as.factor(data2$survived)
-set.seed(567)
-rows = 1:nrow(data2)
-trainRows = sample(rows,round(0.7*nrow(data2)))
-
-trainData = data2[trainRows,]
-testData = data2[-trainRows,]
+trainData = mydata[trainRows,]
+testData = mydata[-trainRows,]
 
 prop.table(table(trainData$survived))
 prop.table(table(testData$survived))
-
-summary(data2)
 
 ## decsionTree
 library(rpart)
@@ -67,19 +44,9 @@ plotcp(dtree1)
 
 library(rpart.plot)
 rpart.plot(dtree1)
-               # control =c(minsplit =1,maxdepth=3,cp=0))
+# control =c(minsplit =1,maxdepth=3,cp=0))
 #cp=0.001 control = c(minsplit =1,maxdepth=5),control = c(cp=0.001)
 dtree1
-
-
-
-plot(dtree1,main="Classification Tree for survived Class",
-     margin=0.1,uniform=TRUE)
-text(dtree1,use.n=T)
-
-
-library(rpart.plot)
-rpart.plot(dtree1)
 
 preds_train = predict(dtree1,trainData)
 preds_train = as.data.frame(preds_train)
@@ -95,63 +62,76 @@ preds$preds_Class = ifelse(preds$`1` > 0.5,1,0)
 table(testData$survived,preds$preds_Class,dnn=c('actuals','preds'))
 
 
-#### ROC
-library(ROCR)
-### add the ROC graph of credit_model1 on the same plot 
-pred = prediction(preds , testData$survived)
-perf= performance(pred, "tpr","fpr")
-# plot(perf,colorize = T)
-
-plot(perf, colorize=T, print.cutoffs.at=seq(0,1,by=0.1), 
-     text.adj=c(1.2,1.2), avg="threshold", lwd=3,
-     main= "ROC")
-
-### AUC for churn model 
-
-AUC_1 = performance(pred, measure = 'auc')@y.values[[1]]
-AUC_1
-
-
-### 
-library(C50)
-
-dtree2 = C5.0(survived ~.,data=trainData)
-plot(dtree2)
-
-preds = predict(dtree2, testData)
-table(testData$survived,preds,dnn=c('actuals','preds'))
-
-
-
 ##### Bagging
-
+#install.packages('adabag')
 library(adabag)
 bagModel = bagging(survived~.,data = trainData,
-                   mfinal = 50,control=c(maxdepth = 10))
-preds = predict(bagModel,trainData,type='response')
-table(trainData$survived, preds$class,dnn=c('acts','preds'))
+                   mfinal = 70,control=c(maxdepth = 10))
 
+
+#Train Data 
+preds = predict(bagModel,trainData,type='response')
+x = table(trainData$survived, preds$class,dnn=c('acts','preds'))
+x
+#F1 Score
+recall_train = x[2,2]/(x[2,1]+x[2,2])
+precision_train = x[2,2]/(x[1,2]+x[2,2])
+recall_train
+precision_train
+F1_bagtrain = 2*recall_train*precision_train/(recall_train+precision_train)
+F1_bagtrain
+
+#Test Data 
 preds = predict(bagModel,testData,type='response')
-table(testData$survived, preds$class,dnn=c('acts','preds'))
+x = table(testData$survived, preds$class,dnn=c('acts','preds'))
+x
+#F1 Score
+recall_test = x[2,2]/(x[2,1]+x[2,2])
+precision_test = x[2,2]/(x[1,2]+x[2,2])
+recall_test
+precision_test
+F1_bagtest = 2*recall_test*precision_test/(recall_test+precision_test)
+F1_bagtest
+
+
 
 
 ####### Random Forest
+#install.packages('randomForest')
 library(randomForest)
+
+
 rfmod = randomForest(survived~.,
                      data = trainData,
                      ntree=150,
-                     mtry=4,
-                     nodesize=5,maxnodes=10,
-                     classwt=c(1,1.5),
+                     mtry=5,
+                     nodesize=10,maxnodes=20,
+                     classwt=c(1,1.3),
                      strata = trainData$survived)
 #,classwt = c(1,100000)mtry=5
-              
+
 rfmod
 preds = predict(rfmod,trainData,type='response')
-table(trainData$survived, preds,dnn=c('acts','preds'))
+x = table(trainData$survived, preds,dnn=c('acts','preds'))
+x
+#F1 Score
+recall_train = x[2,2]/(x[2,1]+x[2,2])
+precision_train = x[2,2]/(x[1,2]+x[2,2])
+recall_train
+precision_train
+F1_bagtrain = 2*recall_train*precision_train/(recall_train+precision_train)
+F1_bagtrain
+
 
 preds = predict(rfmod,testData,type='response')
-table(testData$survived, preds,dnn=c('acts','preds'))
+x = table(testData$survived, preds,dnn=c('acts','preds'))
+#F1 Score
+recall_test = x[2,2]/(x[2,1]+x[2,2])
+precision_test = x[2,2]/(x[1,2]+x[2,2])
+recall_test
+precision_test
+F1_bagtest = 2*recall_test*precision_test/(recall_test+precision_test)
+F1_bagtest
 
 importance(rfmod)## Var importance
 tuneRF(trainData[,-2],trainData[,2])
@@ -161,10 +141,7 @@ library(adabag)
 adaboost = boosting(survived ~ .,
                     data = trainData,
                     mfinal = 100 ,boos = TRUE)
-                    #control =c(minsplit =20,maxdepth=4,cp=0.01,minbucket=20))
-?boosting
-?rpart
-
+#control =c(minsplit =20,maxdepth=4,cp=0.01,minbucket=20))
 importanceplot(adaboost)
 adaboost$importance
 preds = predict(adaboost,trainData,type='response')
@@ -196,4 +173,25 @@ preds = predict(gbmmodel,testData,n.trees = 3500,type = 'response')
 preds_class = ifelse(preds >0.5,1,0)
 table(testData$survived, preds_class,dnn = c('acts','preds'))
 summary(gbmmodel)
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
