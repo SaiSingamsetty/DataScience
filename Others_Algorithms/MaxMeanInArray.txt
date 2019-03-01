@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class MaxMeanInArray
+    {
+        public static void Main2(String[] args)
+        {
+            int[] arr = new int[] { 3, 7, 90, 20, 10, 50, 40 };
+            int size = 3;
+
+
+            /*
+            int length = arr.Length;
+            int sum_till_here = 0;
+            int mean_min = int.MaxValue;
+            int min_index = int.MaxValue;
+            for(int i = 0; i <= length-size; i++)
+            {
+                sum_till_here = 0;
+
+                for(int k = i; k < i+ size; k++)
+                {
+                    sum_till_here += arr[k];
+                    
+                }
+                if (mean_min > sum_till_here / size)
+                {
+                    mean_min = (sum_till_here / size);
+                    min_index = i;
+                }
+            }
+
+            Console.Write(mean_min + " at " + min_index + ", "+ (min_index+size-1));
+            */
+            Console.ReadKey();
+        }
+    }
+}

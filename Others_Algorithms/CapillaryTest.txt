@@ -1,0 +1,139 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class CapillaryNet1
+    {
+        /* 
+         Detailed question: Screenshot 108 
+        
+         5
+         2 20
+         23 200
+         21 21
+         101 2000
+         2002 999998
+         
+        Output: 2002023
+
+        Explanation:
+        Boxes having number 1,22,2001,999999,1000000 does not belong to any range. So the sum of these numbers is the output.
+         
+         */
+        
+        static void Main2(string[] args)
+        {
+            int NumberOfLines = int.Parse(Console.ReadLine());
+            int temp = NumberOfLines;
+            string line = string.Empty;
+            List<string> Ranges = new List<string>();
+            while (temp > 0)
+            {
+                if ((line = Console.ReadLine()) != "")
+                    Ranges.Add(line);
+                temp--;
+            }
+
+            //Dictionary<int, int> AllRangesLR = new Dictionary<int, int>();
+            SortedDictionary<int, int> AllRangesLR = new SortedDictionary<int, int>();
+
+            for (int i = 0; i < Ranges.Count; i++)
+            {
+                string tempstr = Ranges[i];
+                string[] temparr = tempstr.Split(' ');
+
+                int[] arr = temparr.Select(s => int.Parse(s)).ToArray();
+                AllRangesLR.Add(arr[0], arr[1]);
+            }
+
+            int sum = 0;
+
+            sum = GetMissedBoxValueSum(AllRangesLR);
+
+            Console.WriteLine(sum);
+
+            Console.ReadKey();
+        }
+
+        private static int GetMissedBoxValueSum(SortedDictionary<int, int> mydict)
+        {
+            int sum = 0;
+            sum += GetSum(mydict.Keys.ElementAt(0), 0);
+            sum += GetSum(1000001, mydict.Values.ElementAt(mydict.Count - 1));
+
+            for (int i = 1; i < mydict.Count; i++)
+            {
+                sum += GetSum(mydict.Keys.ElementAt(i), mydict.Values.ElementAt(i - 1));
+            }
+
+            return sum;
+
+        }
+        private static int GetSum(int high, int low)
+        {
+            int sum = 0;
+            for (int i = low + 1; i < high; i++)
+            {
+                sum += i;
+            }
+            return sum;
+        }
+    }
+
+    class CapillaryNet2
+    {
+        /*
+        Detailed : Screenshot 109
+        
+        Inputs 
+        4
+        1 -9 2 -1 
+
+            Output: 22
+
+            For element 1, Max product will get with 1*2 = 2
+            For element -9, Max product will get with -9*-1 = 9
+            For element 2, Max product will get with 2*1 = 2
+            For element -1, Max product will get with -1*-9 = 9
+            Sum = 22
+        */
+
+
+        public static void Main2(string[] args)
+        {
+            int lenOfArray = int.Parse(Console.ReadLine());
+
+            string secondline = Console.ReadLine();
+            string[] strarr = secondline.Split(' ');
+            long[] arr = strarr.Select(s => long.Parse(s)).ToArray();
+            int mod = Convert.ToInt32(Math.Pow(10.0, 9.0)) + 7;
+
+            Array.Sort(arr);
+
+            long sum = 0;
+            if (arr[0] * arr[lenOfArray - 1] > arr[0] * arr[1])
+                sum += ((arr[0] * arr[lenOfArray - 1]) % mod);
+            else
+                sum += ((arr[0] * arr[1]) % mod);
+
+            sum += ((arr.Max() * arr[lenOfArray - 2]) % mod);
+
+            for (int i = 1; i < lenOfArray - 1; i++)
+            {
+                if (arr[i] * arr.Max() > arr[i] * arr.Min())
+                    sum += ((arr[i] * arr.Max()) % mod);
+                else
+                    sum += ((arr[i] * arr.Min()) % mod);
+            }
+
+
+            Console.WriteLine(sum);
+
+            Console.ReadKey();
+        }
+    }
+}

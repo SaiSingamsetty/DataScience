@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class DisjointSubArrSum
+    {
+        public static void Main(String[] args)
+        {
+            int LengthOfArray = int.Parse(Console.ReadLine());
+            string secondline = Console.ReadLine();
+
+            string[] strarr = secondline.Split(' ');
+            int[] arr = strarr.Select(s => int.Parse(s)).ToArray();
+            int? temp = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                temp += findSubarraySum(arr, LengthOfArray, arr[i]);
+            }
+            int sum = -10; //test value
+
+            Console.Write(temp);
+
+
+        }
+        static int? findSubarraySum(int[] arr, int n, int sum)
+        {
+
+            Dictionary<int, int?> prevSum = new Dictionary<int, int?>();
+
+            int? res = 0;
+            int currsum = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                currsum += arr[i];
+                if (currsum == sum)
+                    res++;
+
+                if (prevSum.ContainsKey(currsum - sum))
+                    res += prevSum[currsum - sum];
+                //System.Collections.Generic.KeyNotFoundException
+                try
+                {
+                    int? count = prevSum[currsum];
+
+                    prevSum[currsum] = Convert.ToInt32(prevSum[currsum]) + 1;
+                }
+                catch (KeyNotFoundException)
+                {
+                    prevSum.Add(currsum, 1);
+                    continue;
+                }
+
+            }
+
+            return res;
+        }
+    }
+
+}

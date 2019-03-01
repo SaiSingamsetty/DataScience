@@ -1,0 +1,5 @@
+Auto Correlation
+-> Errors correlated among themselves 
+
+Multi collinearity
+-> Inputs correlated among themselves

@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class RespectiveDivisors
+    {
+        /*
+         3
+         8 16 2
+         8 16 4
+         8 16 5
+         
+         Output:
+         2
+         8
+         No crymeth today
+         
+         Explanation:
+         FirsLine in Input is No of testcases
+         
+         In [8,16,2]
+         The second lowest divisor of 8,16 
+         In [8,16,4]
+         The fourth lowest divisor of 8,16
+         In [8,16,5]
+         The fifth lowest divisor of 8,16 
+         
+           If divisor is not there, print "No crymeth today"    
+         
+         */
+        public static void Main2(String[] args)
+        {
+            int NumberOfLines = int.Parse(Console.ReadLine());
+            int temp = NumberOfLines;
+            string line = string.Empty;
+            List<string> Ranges = new List<string>();
+            while (temp > 0)
+            {
+                if ((line = Console.ReadLine()) != "")
+                    Ranges.Add(line);
+                temp--;
+            }
+
+
+            for (int j = 0; j < Ranges.Count; j++)
+            {
+                string tempstr = Ranges[j];
+                string[] temparr = tempstr.Split(' ');
+
+                int[] arr = temparr.Select(s => int.Parse(s)).ToArray();
+
+                int n = gcd(arr[0], arr[1]);
+                List<int> mylist = new List<int>();
+                for (int i = 1; i <= (n); i++)
+                {
+                    if (n % i == 0)
+                    {
+                        mylist.Add(i);
+                    }
+                }
+                if (mylist.Count >= arr[2])
+                    Console.WriteLine(mylist[arr[2] - 1]);
+                else
+                    Console.WriteLine("No crymeth today");
+
+            }
+            Console.ReadKey();
+        }
+        static int gcd(int a, int b)
+        {
+            if (a == 0)
+                return b;
+
+            return gcd(b % a, a);
+        }
+    }
+}

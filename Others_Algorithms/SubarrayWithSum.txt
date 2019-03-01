@@ -1,0 +1,113 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class SubArrayWithSum
+    {
+        static void SAWS(string[] args)
+        {
+            // https://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
+
+
+            List<string> inputlist = new List<string>();
+            string line = string.Empty;
+            while ((line = Console.ReadLine()) != "") //!String.IsNullOrWhiteSpace(line = Console.ReadLine())
+            {
+                inputlist.Add(line);
+            }
+
+            int testcases = Convert.ToInt32(inputlist[0]);
+
+            for (int z = 1; z < inputlist.Count; z = z + 2)
+            {
+                string temp = inputlist[z];
+                string[] temparr = temp.Split(' ');
+                int nofelem = int.Parse(temparr[0]);
+                int sum = int.Parse(temparr[1]);
+
+                temparr = inputlist[z + 1].Split(' ');
+                int[] arr = temparr.Select(s => int.Parse(s)).ToArray();
+
+                // [1,2,3,7,5] Length: 5
+                int tempsum = 0;
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (tempsum == sum)
+                        break;
+
+                    tempsum = 0;
+                    tempsum = arr[i];
+
+                    for (int j = i + 1; j < arr.Length; j++)
+                    {
+                        tempsum = tempsum + arr[j];
+                        if (tempsum > sum)
+                            break;
+                        else if (tempsum == sum)
+                        {
+                            Console.WriteLine($"Indexes are:{i + 1} {j + 1}");
+                            break;
+                        }
+                    }
+                }
+            }
+
+            Console.ReadKey();
+        }
+
+
+
+
+
+        static void Main3(string[] args)
+        {
+            List<string> inputlist = new List<string>();
+            string line = string.Empty;
+            while ((line = Console.ReadLine()) != "") //!String.IsNullOrWhiteSpace(line = Console.ReadLine())
+            {
+                inputlist.Add(line);
+            }
+
+            int testcases = Convert.ToInt32(inputlist[0]);
+
+            for (int z = 1; z < inputlist.Count; z = z + 2)
+            {
+                string temp = inputlist[z];
+                string[] temparr = temp.Split(' ');
+                int nofelem = int.Parse(temparr[0]);
+                int sum = int.Parse(temparr[1]);
+
+                temparr = inputlist[z + 1].Split(' ');
+                int[] arr = temparr.Select(s => int.Parse(s)).ToArray();
+
+                // [1,2,3,7,5] Length: 5
+                int tempsum = 0;
+                int start = 0;
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    tempsum = tempsum + arr[i];
+
+                    if (tempsum > sum)
+                    {
+                        tempsum = tempsum - arr[start];
+                        start++;
+                    }
+                    if (tempsum == sum)
+                    {
+
+                        Console.WriteLine($"Indexes are {start + 1} {i + 1}");
+                        break;
+                    }
+
+                }
+            }
+
+            Console.ReadKey();
+        }
+
+    }
+}

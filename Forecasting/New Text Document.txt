@@ -1,0 +1,5 @@
+https://a-little-book-of-r-for-time-series.readthedocs.io/en/latest/src/timeseries.html
+
+http://r-statistics.co/Time-Series-Analysis-With-R.html
+
+https://www.vividcortex.com/blog/holt-winters-forecasting-simplified

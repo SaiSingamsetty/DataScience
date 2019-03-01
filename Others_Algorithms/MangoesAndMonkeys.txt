@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class MangoesAndMonkies
+    {
+        // SCREENSHOT 114 and 115
+
+        public static void Main(String[] args)
+        {
+
+            string firstline = Console.ReadLine();
+            string secondline = Console.ReadLine();
+
+            string[] NSKstr = firstline.Split(' ');
+            long[] NSK = NSKstr.Select(s => long.Parse(s)).ToArray();
+
+            long N = NSK[0]; long S = NSK[1]; long K = NSK[2];
+
+            string[] strarr = secondline.Split(' ');
+            long[] mangoarr = strarr.Select(s => long.Parse(s)).ToArray();
+
+            Array.Sort(mangoarr);
+            Array.Reverse(mangoarr);
+
+            long wastedmangoes = 0;
+
+            long i;
+
+            for (i = 0; i + K - 1 < N; i = i + K)
+            {
+                long temp = 0;
+
+                for (long j = i; j < i + K; j++)
+                {
+                    temp += mangoarr[j];
+                }
+
+                wastedmangoes += temp % S;
+            }
+
+            if (N % K > 0)
+            {
+                long temp = 0;
+
+                for (long j = i; j < N; j++)
+                {
+                    temp += mangoarr[j];
+                }
+                wastedmangoes += (temp % S);
+            }
+
+
+            Console.WriteLine(wastedmangoes);
+
+            Console.ReadKey();
+        }
+
+    }
+
+}
