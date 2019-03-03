@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class Stack
+    {
+        public int[] elements;
+        public int top;
+        public int size; // making size accessible easily
+
+        public Stack(int x)
+        {
+            elements = new int[x];
+            top = -1;
+            size = x;
+        }
+       
+        public static void Main(String[] args)
+        {
+            Stack s = new Stack(5);
+            s.Push(10);
+            s.Push(20);
+            s.Push(30);
+            s.Push(40);
+            s.Push(50);
+            s.Push(60);
+            s.Peek();
+            s.PrintStack();
+            s.Pop();
+            s.Pop();
+            s.Pop();
+            s.Pop();
+            s.PrintStack();
+            s.Peek();
+            s.Pop();
+            s.Pop();
+            s.PrintStack();
+
+            Console.ReadKey();
+        }
+
+        public void Push(int x)
+        {
+            if(top == size - 1)
+            {
+                Console.WriteLine("Stack Overflow");
+                return;
+            }
+
+            elements[++top] = x;
+        }
+
+        public int Pop()
+        {
+            if(top == -1)
+            {
+                Console.WriteLine("Stack Underflow");
+                return -1;
+            }
+
+            Console.WriteLine($"Element popped out is {elements[top]}");
+            return elements[top--];
+        }
+
+        public void PrintStack()
+        {
+            if(top == -1)
+            {
+                Console.WriteLine("Empty Stack!");
+                return;
+            }
+            
+            for(int i = 0; i <= top; i++)
+            {
+                Console.WriteLine(elements[i]);
+            }
+        }
+
+        public void Peek()
+        {
+            if(top == -1)
+            {
+                Console.WriteLine("Empty Stack!");
+                return;
+            }
+
+            Console.WriteLine("Peek element is:" + elements[top]);
+        }
+        
+       
+
+    }
+}
+    

@@ -1,0 +1,106 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class LinkedList
+    {
+        //https://www.youtube.com/watch?v=OkkMub7pPBI
+//https://social.technet.microsoft.com/wiki/contents/articles/51479.c-implementation-of-stack-and-queue-using-linked-list.aspx
+        public static void Main(String[] args)
+        {
+            StackUsingLinkedList list = new StackUsingLinkedList();
+            list.Push(10);
+            list.Push(20);
+            list.Push(30);
+
+            list.PrintStack();
+            list.Pop();
+            list.PrintStack();
+            list.Pop();
+
+            Console.WriteLine("Peek element: ");
+            list.Peek();
+
+            Console.ReadKey();
+        }
+        public class Node
+        {
+            public int data { get; set; }
+            public Node next;
+
+            public Node(int data)
+            {
+                this.data = data;
+                this.next = null;
+            }
+
+        }
+        public class StackUsingLinkedList
+        {
+            Node top;
+            public StackUsingLinkedList()
+            {
+                this.top = null;
+            }
+
+            public void Push(int value)
+            {
+                Node newNode = new Node(value);
+                if(top == null)
+                {
+                    newNode.next = null;
+                }
+                else
+                {
+                    newNode.next = top;
+                }
+
+                top = newNode;
+
+            }
+
+            public void Pop()
+            {
+                if(top == null)
+                {
+                    Console.Write("Stack Underflow.");
+                    return;
+                }
+
+                top = top.next;
+            }
+
+            public void Peek()
+            {
+                if(top == null)
+                {
+                    Console.WriteLine("Stack Underflow.");
+                    return;
+                }
+                Console.WriteLine(top.data);
+            }
+
+            public void PrintStack()
+            {
+                if(top == null)
+                {
+                    Console.WriteLine("Stack Underflow.");
+                    return;
+                }
+                Console.WriteLine("");
+                Node temp = top;
+                while(temp != null)
+                {
+                    Console.WriteLine(temp.data + "\n");
+                    temp = temp.next;
+                }
+            }
+        }        
+
+    }
+}
+    

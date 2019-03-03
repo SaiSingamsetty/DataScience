@@ -1,0 +1,54 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class QueueUsingStack
+    {
+	// Enqueue costly
+        Stack s1 = new Stack();  // System generated Class Stack. It has inbuilt methods
+        Stack s2 = new Stack();
+        public static void Main(String[] args)
+        {
+            QueueUsingStack q = new QueueUsingStack();
+            q.Enqueue(1);
+            q.Enqueue(2);
+            q.Enqueue(3);
+            Console.Write(q.Dequeue() + " ");
+            Console.Write(q.Dequeue() + " ");
+
+            Console.ReadKey();
+        }
+
+        public void Enqueue (int x)
+        {
+            while(s1.Count > 0)
+            {
+                s2.Push(s1.Pop());
+            }
+
+            s1.Push(x);
+
+            while(s2.Count > 0)
+            {
+                s1.Push(s2.Pop());
+            }
+
+        }
+
+        public int Dequeue()
+        {
+            if(s1.Count == 0)
+            {
+                Console.WriteLine("Empty Queue");
+                return -1;
+            }
+            return Convert.ToInt32(s1.Pop());
+        }
+    }
+}
+    

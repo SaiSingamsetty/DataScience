@@ -1,0 +1,257 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    class LinkedList
+    {
+        public static void Main(String[] args)
+        {
+            LinkedList list = new LinkedList();
+            list.Head = new Node(2);
+            Node third = new Node(3);
+            Node fourth = new Node(4);
+
+            list.Head.next = third;
+            third.next = fourth;
+
+            list.Push(new Node(1));
+            list.insertAfter(list.Head.next, 20);
+            list.insertAfter(third, 30);
+            list.append(40);
+
+            Console.WriteLine("Original List: ");
+            list.printList(list.Head);
+            Console.Write("\nLength of list:");
+            Console.Write(list.ListLength(list));
+
+            Console.Write("\n\nDelete Node method: \n");
+            list.DeleteNode(30);
+            list.printList(list.Head);
+            Console.Write("\nInserting back.. \n");
+            list.insertAfter(third, 30);
+            list.printList(list.Head);
+
+            Console.Write("\nDelete At method: \n");
+            list.DeleteAt(6);
+            list.printList(list.Head);
+            Console.Write("\nInserting back.. \n");
+            list.append(40);
+            list.printList(list.Head);
+
+            Console.Write($"\nSearch if 30 exists..");
+            Console.WriteLine(list.Search(list.Head, 30));
+            Console.Write($"\nSearch if 80 exists..");
+            Console.WriteLine(list.Search(list.Head, 80));
+
+            Console.Write("\nGet the value at 4: ");
+            Console.WriteLine(list.GetValue(list.Head, 4, list.ListLength(list)));
+            Console.Write("\nGet the value at 7: ");
+            Console.WriteLine(list.GetValue(list.Head, 7, list.ListLength(list)));
+            Console.Write("\nGet the value at 6: ");
+            Console.WriteLine(list.GetValue(list.Head, 6, list.ListLength(list)));
+
+            Console.WriteLine("\n\nReversing the List");
+            LinkedList list2 = new LinkedList();
+            list2.Head = new Node(22);
+
+            Node temp2 = new Node(33);
+            Node temp3 = new Node(44);
+
+            list2.Head.next = temp2;
+            temp2.next = temp3;
+
+            list2.printList(list2.Head);
+            list2.ReverseList(list2.Head);
+            list2.printList(list2.Head);
+
+
+            Console.ReadKey();
+        }
+
+        // Head of the Linked List
+        Node Head;
+        public class Node
+        {
+            public int data;
+            public Node next;
+
+            public Node(int data)
+            {
+                this.data = data;
+                this.next = null;
+            }
+
+        }
+
+        public void printList(Node head)
+        {
+            Node n = head;
+            while (n != null)
+            {
+                Console.Write(n.data + " ");
+                n = n.next;
+            }
+            Console.Write("\n");
+        }
+
+        public void Push(Node n)
+        {
+            if (n != null)
+            {
+                n.next = Head;
+                Head = n;
+            }
+
+        }
+
+        public void insertAfter(Node prevNode, int newdata)
+        {
+            Node newNode = new Node(newdata);
+            newNode.next = prevNode.next;
+            prevNode.next = newNode;
+
+        }
+
+        public void append(int newdata)
+        {
+            Node newNode = new Node(newdata);
+            newNode.next = null;
+
+            Node last = Head;
+            while (last.next != null)
+            {
+                last = last.next;
+            }
+            last.next = newNode;
+        }
+
+        public void DeleteNode(int key)
+        {
+            Node temp = Head;
+            Node prev = null;
+
+            // Checking head if it is the node to get deleted
+            if(temp.data == key)
+            {
+                Head = temp.next;
+                return;
+            }
+
+            //Traversing through nodes
+            while(temp != null && temp.data != key)
+            {
+                prev = temp;
+                temp = temp.next;
+            }
+
+            // If key was not found
+            if (temp == null) return;
+
+            //Unlink the node
+            prev.next = temp.next;
+            
+            
+        }
+
+        public void DeleteAt(int position)
+        {
+            Node temp = Head;
+            Node prev = null;
+
+            if(position == 0)
+            {
+                Head = temp.next;
+                return;
+            }
+
+            int counter = 0;
+            while(counter < position)
+            {
+                prev = temp;
+                temp = temp.next;
+                counter++;
+            }
+
+            if (temp == null) return;
+
+            //Unlink the node
+            prev.next = temp.next;
+
+        }
+
+        public void DeleteLinkedList()
+        {
+            Head = null;
+        }
+
+        public int ListLength(LinkedList list)
+        {
+            int counter = 0;
+
+            Node temp = Head;
+            while (temp.next != null)
+            {
+                counter++;
+                temp = temp.next;
+            }
+            return counter+1;
+
+        }
+
+        public bool Search(Node head, int x)
+        {
+            Node temp = head;
+
+            while(temp != null && temp.data != x)
+            {
+                temp = temp.next;
+            }
+
+            if (temp != null && temp.data == x)
+                return true;
+            else
+                return false;
+
+        }
+
+        public int GetValue(Node head, int index, int length)
+        {
+            Node temp = head;
+            if (index >= length)
+                return -1;
+
+            while(temp != null && index > 0)
+            {
+                temp = temp.next;
+                index--;
+            }
+
+            if (temp != null)
+                return temp.data;
+
+            return -1;
+        }
+
+        public void ReverseList(Node head)
+        {
+            Node prev = null, next = null, current = head;
+
+            while(current != null)
+            {
+                next = current.next;
+                current.next = prev;
+
+                prev = current;
+                current = next;
+            }
+            Head = prev;
+
+        }
+
+    }
+}
+    

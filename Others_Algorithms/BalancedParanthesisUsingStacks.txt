@@ -1,0 +1,113 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AlgoPrac
+{
+    
+    class BalancedParam
+    {
+        public static void Main(String[] args)
+        {
+            
+                
+                Console.WriteLine("Enter the string..");
+                string input = Console.ReadLine();
+
+                Console.WriteLine("Is the expression Balanced ? " + IsBalanced(input.ToCharArray()));
+                
+            
+
+            Console.ReadKey();
+        }
+
+        public static bool IsMatch(char a, char b)
+        {
+            if ((a == '(' && b == ')') || (a == '[' && b == ']') || (a == '{' && b == '}'))
+                return true;
+            else
+                return false;
+        }
+
+        public static bool IsBalanced(char[] exp)
+        {
+            Stack s = new Stack(20);
+
+            foreach(char x in exp)
+            {
+                if(x == '(' || x == '{' || x == '[')
+                {
+                    s.Push(x);
+                }
+
+                if (x == ')' || x == '}' || x == ']')
+                {
+                    if (s.isEmpty())
+                        return false;
+
+                    if (!IsMatch(s.Pop(), x))
+                        return false;
+                    else
+                        return true;
+                }
+
+
+            }
+
+            if (!s.isEmpty())
+                return false;
+            else
+                return true;
+
+        }
+       
+    }
+    class Stack
+    {
+        char[] exp;
+        int top = -1;
+        int size;
+        public Stack(int x)
+        {
+            this.size = x;
+            this.exp = new char[x];
+            this.top = -1;
+        }
+
+        public void Push(char data)
+        {
+            if(top == size - 1)
+            {
+                Console.WriteLine("Stack Overflow.\n");
+                return;
+            }
+
+            exp[++top] = data;
+        }
+
+        public char Pop()
+        {
+            if(top == -1)
+            {
+                Console.WriteLine("Stack Underflow");
+                return '\0';
+            }
+
+            return exp[top--];
+        }
+
+        public bool isEmpty()
+        {
+            if (top == -1)
+                return true;
+            else
+                return false;
+        }
+
+    }
+
+}
+    
