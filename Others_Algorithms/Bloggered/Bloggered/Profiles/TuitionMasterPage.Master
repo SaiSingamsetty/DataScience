@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TuitionMasterPage.master.cs" Inherits="Bloggered.TuitionMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Bloggered Tuitions</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <h1>Bloggered Tuitions</h1>
+        <br />
+        <asp:Label ID="Label1" runat="server" Visible="False"></asp:Label>
+        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Dash Board</asp:LinkButton>
+        &nbsp;&nbsp;&nbsp;
+        <asp:LinkButton ID="lnkProfile" runat="server" OnClick="lnkProfile_Click">My Profile</asp:LinkButton>
+        &nbsp;&nbsp;&nbsp;
+        <asp:LinkButton ID="lnkSuggestions" runat="server" OnClick="lnkSuggestions_Click">Find Suggestions</asp:LinkButton>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:LinkButton ID="lnkLogout" runat="server" OnClick="lnkLogout_Click">Logout</asp:LinkButton>
+        &nbsp;
+        <asp:Label ID="lblDet" runat="server" Text="Details"></asp:Label>
+        <br />
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+        <br />
+        <br />
+    <footer id="footer" runat="server">Built with Love!!!</footer>
+    </form>
+    </body>
+</html>
