@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using Bloggered.Models;
 
 namespace Bloggered.Models
 {
@@ -22,6 +23,9 @@ namespace Bloggered.Models
         public string Address { get; set; }
         public bool DemoClassCharged { get; set; }
         public string BoardOfEducation { get; set; }
+
+        public List<TutorStandard> TutorStandards { get; set; }
+        public List<TutorSubject> TutorSubjects { get; set; }
 
         public User(string un, string pw)
         {

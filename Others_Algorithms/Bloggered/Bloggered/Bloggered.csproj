@@ -157,8 +157,18 @@
     <Compile Include="Migrations\201903081140389_UpdatestoUser.Designer.cs">
       <DependentUpon>201903081140389_UpdatestoUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903141547542_UserSubjectsClasses.cs" />
+    <Compile Include="Migrations\201903141547542_UserSubjectsClasses.Designer.cs">
+      <DependentUpon>201903141547542_UserSubjectsClasses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903141614088_UserSubStand.cs" />
+    <Compile Include="Migrations\201903141614088_UserSubStand.Designer.cs">
+      <DependentUpon>201903141614088_UserSubStand.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\TuitionContext.cs" />
+    <Compile Include="Models\TutorStandard.cs" />
+    <Compile Include="Models\TutorSubject.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Profiles\DashBoard.aspx.cs">
       <DependentUpon>DashBoard.aspx</DependentUpon>
@@ -227,6 +237,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903081140389_UpdatestoUser.resx">
       <DependentUpon>201903081140389_UpdatestoUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903141547542_UserSubjectsClasses.resx">
+      <DependentUpon>201903141547542_UserSubjectsClasses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903141614088_UserSubStand.resx">
+      <DependentUpon>201903141614088_UserSubStand.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

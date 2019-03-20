@@ -38,3 +38,45 @@ C:\Users\stsingam\Documents\Visual Studio 2015\Projects\TryBig\Bloggered\Blogger
 C:\Users\stsingam\Documents\Visual Studio 2015\Projects\TryBig\Bloggered\Bloggered\obj\Debug\Bloggered.Migrations.InitialCreate.resources
 C:\Users\stsingam\Documents\Visual Studio 2015\Projects\TryBig\Bloggered\Bloggered\obj\Debug\Bloggered.csproj.GenerateResource.Cache
 C:\Users\stsingam\Documents\Visual Studio 2015\Projects\TryBig\Bloggered\Bloggered\obj\Debug\Bloggered.Migrations.UpdatestoUser.resources
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\ApplicationInsights.config
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\csc.exe
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\System.Collections.Immutable.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\System.Reflection.Metadata.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\vbc.exe
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\VBCSCompiler.exe
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\roslyn\VBCSCompiler.exe.config
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Bloggered.dll.config
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Bloggered.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Bloggered.pdb
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\EntityFramework.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\EntityFramework.SqlServer.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.DependencyCollector.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.Web.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.WindowsServer.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.ApplicationInsights.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\EntityFramework.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\EntityFramework.SqlServer.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.DependencyCollector.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.Web.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.AI.WindowsServer.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.ApplicationInsights.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.csprojResolveAssemblyReference.cache
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.Migrations.InitialCreate.resources
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.Migrations.UpdatestoUser.resources
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.csproj.GenerateResource.Cache
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.dll
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.pdb
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.Migrations.UserSubjectsClasses.resources
+D:\Learnings\DataScience\ML\Others_Algorithms\Bloggered\Bloggered\obj\Debug\Bloggered.Migrations.UserSubStand.resources

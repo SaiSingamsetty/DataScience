@@ -19,7 +19,7 @@ namespace Bloggered.Profiles
         protected void Page_Load(object sender, EventArgs e)
         {
             Label2.Text = Request.QueryString["UserID"] != null ? Request.QueryString["UserID"] : "";
-           // PopulateData(Convert.ToInt32(Label2.Text));
+           
         }
 
         [WebMethod]
@@ -34,7 +34,7 @@ namespace Bloggered.Profiles
 
                 for (int i = 0; i < suggestions.Count; i++)
                 {
-                    concatenated_suggestions = concatenated_suggestions + "<div><a href='#' onclick='pop(event)'>" + suggestions[i].UserId + "</a> <span> " + suggestions[i].UserName + "</span><br/><span>" + suggestions[i].Description + "</span></div><br/><hr>";
+                    concatenated_suggestions = concatenated_suggestions + "<div><a href='Details.aspx?UserID=" + suggestions[i].UserId + "'>" + suggestions[i].UserId + "</a> <span> " + suggestions[i].UserName + "</span><br/><span>" + suggestions[i].Description + "</span></div><br/><hr>";
                     //Details.aspx
                 }
                 if (concatenated_suggestions != string.Empty)
@@ -44,9 +44,6 @@ namespace Bloggered.Profiles
             }
         }
 
-        protected void HiddenField1_ValueChanged(object sender, EventArgs e)
-        {
-            Session["detailsid"] = HiddenField1.Value;
-        }
+       
     }
 }

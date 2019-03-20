@@ -50,7 +50,7 @@ namespace Bloggered.Profiles
                         lblForExperience.Visible = false;
                         lblExperience.Visible = false;
                         lblForRecentDegree.Text = "Class Studying:";
-                        lblForRecentInst.Text = "Schhol/College:";
+                        lblForRecentInst.Text = "School/College:";
                         lblForDescription.Text = "Requirement in words:";
                         lblForDemo.Text = "Is Demo class needed?";
                         lblForBoard.Visible = true;
